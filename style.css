@@ -1,6 +1,19 @@
 /* =====================
    STYLE GLOBAL
 ===================== */
+/* Rend la page flexible verticalement */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Le contenu doit prendre toute la hauteur restante */
+main {
+    flex: 1;
+}
 
 body {
     margin: 0;
