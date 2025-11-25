@@ -1,0 +1,92 @@
+/* =====================
+   STYLE GLOBAL
+===================== */
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f7f7f7;
+    color: #333;
+}
+
+/* COULEUR PRINCIPALE */
+:root {
+    --orange: #ff8a3d;
+    --dark: #1f1f1f;
+    --light: #ffffff;
+}
+
+/* HEADER */
+header {
+    background: var(--dark);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: var(--orange);
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--orange);
+}
+
+/* TITRES */
+h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--dark);
+    margin-top: 40px;
+}
+
+/* SECTIONS */
+section {
+    max-width: 1000px;
+    padding: 30px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* GRILLES */
+.grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* CARDS */
+.card {
+    background: var(--light);
+    border-radius: 20px;
+    padding: 20px;
+    border-left: 6px solid var(--orange);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: scale(1.02);
+    transition: .2s;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--dark);
+    color: white;
+    margin-top: 60px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
