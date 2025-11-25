@@ -2,54 +2,667 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio BTS SIO SISR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #ff6b35;
+            --dark-orange: #e55527;
+            --light-orange: #ff8c61;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --text-light: #f5f5f5;
+            --text-gray: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation fixe */
+        nav {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav a {
+            width: 12px;
+            height: 12px;
+            background: var(--text-gray);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--primary-orange);
+            transform: scale(1.5);
+        }
+
+        nav a::after {
+            content: attr(data-section);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        nav a:hover::after {
+            opacity: 1;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 80px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Accueil */
+        #accueil {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #accueil h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-orange), var(--light-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        #accueil p {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            background: var(--primary-orange);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            background: var(--dark-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Présentation */
+        #presentation {
+            background: var(--darker-bg);
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: var(--primary-orange);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: var(--primary-orange);
+        }
+
+        .presentation-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        .presentation-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+        }
+
+        .presentation-text h3 {
+            color: var(--primary-orange);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Expérience */
+        #experience {
+            background: var(--dark-bg);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .experience-card {
+            background: var(--darker-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-orange);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .experience-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .experience-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        .experience-card .date {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .experience-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Projets */
+        #projets {
+            background: var(--darker-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--dark-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .project-info p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--primary-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Veille */
+        #veille {
+            background: var(--dark-bg);
+        }
+
+        .veille-content {
+            margin-top: 40px;
+        }
+
+        .veille-item {
+            background: var(--darker-bg);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border-top: 3px solid var(--primary-orange);
+        }
+
+        .veille-item h3 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .veille-item p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--darker-bg);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--dark-bg);
+            border: 2px solid var(--primary-orange);
+            border-radius: 10px;
+            padding: 15px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--dark-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                right: 15px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            #accueil h1 {
+                font-size: 2.5rem;
+            }
+
+            .presentation-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<header>
-    <h1>Portfolio SIO – SISR</h1>
+    <!-- Navigation -->
     <nav>
-        <a href="index.html">Accueil</a>
-        <a href="profil.html">Profil</a>
-        <a href="competences.html">Compétences</a>
-        <a href="projets.html">Projets</a>
-        <a href="veille.html">Veille</a>
-        <a href="contact.html">Contact</a>
+        <a href="#accueil" data-section="Accueil" class="active"></a>
+        <a href="#presentation" data-section="Présentation"></a>
+        <a href="#experience" data-section="Expérience"></a>
+        <a href="#projets" data-section="Projets"></a>
+        <a href="#veille" data-section="Veille"></a>
+        <a href="#contact" data-section="Contact"></a>
     </nav>
-</header>
 
-<section>
-    <h2>Bienvenue sur mon Portfolio</h2>
-    <p style="text-align:center; font-size:18px;">
-        Étudiant en **BTS SIO option SISR**, voici mon portfolio regroupant mes projets, compétences
-        professionnelles, documentations techniques et veille technologique, conformément aux exigences
-        de l’épreuve E4 / E5.
-    </p>
-</section>
+    <!-- Section Accueil -->
+    <section id="accueil">
+        <h1>Portfolio BTS SIO SISR</h1>
+        <p>Bienvenue sur mon portfolio professionnel</p>
+        <a href="#presentation" class="cta-button">Découvrir mon parcours</a>
+    </section>
 
-<section class="grid">
-    <div class="card">
-        <h3>Profil</h3>
-        <p>Mon parcours, mes compétences générales, mon CV et mon projet professionnel.</p>
-    </div>
-    <div class="card">
-        <h3>Compétences SISR</h3>
-        <p>Détails des compétences du référentiel (administration systèmes, réseaux, sécurité).</p>
-    </div>
-    <div class="card">
-        <h3>Projets & Situations Professionnelles</h3>
-        <p>Mes missions réalisées en entreprise, TP, projets personnels et dossiers techniques.</p>
-    </div>
-    <div class="card">
-        <h3>Veille Technologique</h3>
-        <p>Ma veille axée sur la cybersécurité, réseaux, virtualisation, etc.</p>
-    </div>
-</section>
+    <!-- Section Présentation -->
+    <section id="presentation">
+        <div class="content-wrapper">
+            <h2 class="section-title">Présentation</h2>
+            <div class="presentation-content">
+                <div class="profile-image">👨‍💻</div>
+                <div class="presentation-text">
+                    <p>Bonjour, je suis étudiant en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux).</p>
+                    <p>Passionné par les technologies informatiques, je me spécialise dans l'administration des systèmes et des réseaux, la sécurité informatique et la gestion d'infrastructures.</p>
+                    
+                    <h3>Compétences techniques</h3>
+                    <p>• Administration systèmes (Windows Server, Linux)<br>
+                    • Réseaux et protocoles<br>
+                    • Virtualisation (VMware, Hyper-V)<br>
+                    • Sécurité informatique<br>
+                    • Support utilisateur</p>
+                    
+                    <h3>Objectifs professionnels</h3>
+                    <p>Mon objectif est de devenir administrateur systèmes et réseaux, et de contribuer à la sécurisation et l'optimisation des infrastructures IT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    © 2025 – Portfolio BTS SIO SISR
-</footer>
+    <!-- Section Expérience -->
+    <section id="experience">
+        <div class="content-wrapper">
+            <h2 class="section-title">Expérience</h2>
+            <div class="experience-grid">
+                <div class="experience-card" onclick="window.open('experience-stage1.html', '_blank')">
+                    <h3>Stage - Administration Systèmes</h3>
+                    <div class="date">Juin 2024 - Août 2024</div>
+                    <p>Maintenance et administration de serveurs Windows Server, gestion des utilisateurs Active Directory, support technique niveau 1 et 2.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
+                </div>
 
+                <div class="experience-card" onclick="window.open('experience-stage2.html', '_blank')">
+                    <h3>Stage - Infrastructure Réseaux</h3>
+                    <div class="date">Janvier 2024 - Mars 2024</div>
+                    <p>Configuration de routeurs et switches, mise en place de VLANs, documentation technique de l'infrastructure réseau.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
+                </div>
+
+                <div class="experience-card" onclick="window.open('experience-projet.html', '_blank')">
+                    <h3>Projet Scolaire - Serveur Mail</h3>
+                    <div class="date">Novembre 2023 - Décembre 2023</div>
+                    <p>Mise en place d'un serveur mail sous Linux (Postfix), configuration DNS, sécurisation avec SSL/TLS.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets">
+        <div class="content-wrapper">
+            <h2 class="section-title">Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">🖥️</div>
+                    <div class="project-info">
+                        <h3>Infrastructure Virtualisée</h3>
+                        <p>Création d'une infrastructure complète avec VMware incluant serveurs web, base de données, et contrôleur de domaine.</p>
+                        <div class="project-tags">
+                            <span class="tag">VMware</span>
+                            <span class="tag">Windows Server</span>
+                            <span class="tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🔒</div>
+                    <div class="project-info">
+                        <h3>Audit de Sécurité</h3>
+                        <p>Réalisation d'un audit de sécurité complet d'un réseau d'entreprise avec recommandations et plan d'action.</p>
+                        <div class="project-tags">
+                            <span class="tag">Sécurité</span>
+                            <span class="tag">Audit</span>
+                            <span class="tag">Nmap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">📡</div>
+                    <div class="project-info">
+                        <h3>Solution de Supervision</h3>
+                        <p>Mise en place d'une solution de monitoring réseau avec alertes automatiques et tableaux de bord.</p>
+                        <div class="project-tags">
+                            <span class="tag">Monitoring</span>
+                            <span class="tag">Nagios</span>
+                            <span class="tag">SNMP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Veille -->
+    <section id="veille">
+        <div class="content-wrapper">
+            <h2 class="section-title">Veille Technologique</h2>
+            <div class="veille-content">
+                <div class="veille-item">
+                    <h3>Cybersécurité et menaces émergentes</h3>
+                    <p>Je réalise une veille constante sur les nouvelles menaces cybersécuritaires, les vulnérabilités zero-day, et les bonnes pratiques de sécurisation des infrastructures. Sources : ANSSI, CERT-FR, blogs spécialisés en sécurité.</p>
+                </div>
+
+                <div class="veille-item">
+                    <h3>Technologies de virtualisation et Cloud</h3>
+                    <p>Suivi des évolutions dans le domaine de la virtualisation (VMware, Hyper-V, Proxmox) et des solutions cloud (AWS, Azure, GCP). Focus sur les technologies de conteneurisation comme Docker et Kubernetes.</p>
+                </div>
+
+                <div class="veille-item">
+                    <h3>Administration systèmes et automatisation</h3>
+                    <p>Veille sur les outils d'automatisation (Ansible, Puppet, PowerShell), les nouvelles versions de systèmes d'exploitation serveurs, et les meilleures pratiques d'administration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact">
+        <div class="content-wrapper">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p style="color: var(--text-gray);">votre.email@exemple.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h3>Téléphone</h3>
+                            <p style="color: var(--text-gray);">+33 6 XX XX XX XX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <p style="color: var(--text-gray);">linkedin.com/in/votre-profil</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🐙</div>
+                        <div>
+                            <h3>GitHub</h3>
+                            <p style="color: var(--text-gray);">github.com/votre-username</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="return handleSubmit(event)">
+                    <input type="text" placeholder="Nom" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Sujet">
+                    <textarea placeholder="Votre message" required></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation active
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Gestion du formulaire
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Formulaire envoyé ! (Fonctionnalité à implémenter avec un backend)');
+            return false;
+        }
+
+        // Smooth scroll pour les liens
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
