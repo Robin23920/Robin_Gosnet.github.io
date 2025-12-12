@@ -247,8 +247,8 @@
             line-height: 1.6;
         }
 
-        /* Projets */
-        #projets {
+        /* Réalisations */
+        #realisations {
             background: var(--darker-bg);
         }
 
@@ -455,7 +455,7 @@
         <a href="#accueil" data-section="Accueil" class="active"></a>
         <a href="#presentation" data-section="Présentation"></a>
         <a href="#experience" data-section="Expérience"></a>
-        <a href="#projets" data-section="Projets"></a>
+        <a href="#realisations" data-section="Réalisations"></a>
         <a href="#veille" data-section="Veille"></a>
         <a href="#contact" data-section="Contact"></a>
     </nav>
@@ -524,12 +524,12 @@
         </div>
     </section>
 
-    <!-- Section Projets -->
-    <section id="projets">
+    <!-- Section Réalisations -->
+    <section id="realisations">
         <div class="content-wrapper">
-            <h2 class="section-title">Projets</h2>
+            <h2 class="section-title">Réalisations</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" onclick="window.location.href='realisation-infrastructure.html'">
                     <div class="project-image">🖥️</div>
                     <div class="project-info">
                         <h3>Infrastructure Virtualisée</h3>
@@ -539,10 +539,11 @@
                             <span class="tag">Windows Server</span>
                             <span class="tag">Linux</span>
                         </div>
+                        <p style="color: var(--primary-orange); margin-top: 15px;">→ Cliquez pour plus de détails</p>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" onclick="window.location.href='realisation-securite.html'">
                     <div class="project-image">🔒</div>
                     <div class="project-info">
                         <h3>Audit de Sécurité</h3>
@@ -552,10 +553,11 @@
                             <span class="tag">Audit</span>
                             <span class="tag">Nmap</span>
                         </div>
+                        <p style="color: var(--primary-orange); margin-top: 15px;">→ Cliquez pour plus de détails</p>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" onclick="window.location.href='realisation-supervision.html'">
                     <div class="project-image">📡</div>
                     <div class="project-info">
                         <h3>Solution de Supervision</h3>
@@ -565,6 +567,7 @@
                             <span class="tag">Nagios</span>
                             <span class="tag">SNMP</span>
                         </div>
+                        <p style="color: var(--primary-orange); margin-top: 15px;">→ Cliquez pour plus de détails</p>
                     </div>
                 </div>
             </div>
@@ -576,19 +579,22 @@
         <div class="content-wrapper">
             <h2 class="section-title">Veille Technologique</h2>
             <div class="veille-content">
-                <div class="veille-item">
+                <div class="veille-item" onclick="window.location.href='veille-cybersecurite.html'" style="cursor: pointer;">
                     <h3>Cybersécurité et menaces émergentes</h3>
                     <p>Je réalise une veille constante sur les nouvelles menaces cybersécuritaires, les vulnérabilités zero-day, et les bonnes pratiques de sécurisation des infrastructures. Sources : ANSSI, CERT-FR, blogs spécialisés en sécurité.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
                 </div>
 
-                <div class="veille-item">
+                <div class="veille-item" onclick="window.location.href='veille-cloud.html'" style="cursor: pointer;">
                     <h3>Technologies de virtualisation et Cloud</h3>
                     <p>Suivi des évolutions dans le domaine de la virtualisation (VMware, Hyper-V, Proxmox) et des solutions cloud (AWS, Azure, GCP). Focus sur les technologies de conteneurisation comme Docker et Kubernetes.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
                 </div>
 
-                <div class="veille-item">
+                <div class="veille-item" onclick="window.location.href='veille-automatisation.html'" style="cursor: pointer;">
                     <h3>Administration systèmes et automatisation</h3>
                     <p>Veille sur les outils d'automatisation (Ansible, Puppet, PowerShell), les nouvelles versions de systèmes d'exploitation serveurs, et les meilleures pratiques d'administration.</p>
+                    <p style="color: var(--primary-orange); margin-top: 10px;">→ Cliquez pour plus de détails</p>
                 </div>
             </div>
         </div>
