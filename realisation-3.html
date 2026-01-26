@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réalisation - Infrastructure Virtualisée</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #ff6b35;
+            --dark-orange: #e55527;
+            --light-orange: #ff8c61;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --text-light: #f5f5f5;
+            --text-gray: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding: 30px 10%;
+            border-bottom: 3px solid var(--primary-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: var(--light-orange);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 10%;
+        }
+
+        .realisation-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .realisation-header h1 {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .realisation-header .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: var(--primary-orange);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .content-section {
+            background: var(--darker-bg);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary-orange);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-section h2 {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-section h3 {
+            color: var(--light-orange);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .content-section ul li {
+            color: var(--text-gray);
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .content-section ul li::before {
+            content: "▸";
+            color: var(--primary-orange);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p, .highlight-box ul li {
+            color: white;
+        }
+
+        .highlight-box ul li::before {
+            color: var(--darker-bg);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .column-item {
+            background: var(--dark-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 3px solid var(--primary-orange);
+        }
+
+        .column-item h4 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .architecture-diagram {
+            background: var(--dark-bg);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .architecture-diagram pre {
+            color: var(--text-gray);
+            text-align: left;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: var(--darker-bg);
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 2px solid var(--primary-orange);
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: var(--text-gray);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 5%;
+            }
+
+            .realisation-header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+    </header>
+
+    <div class="container">
+        <div class="realisation-header">
+            <h1>Infrastructure Virtualisée</h1>
+            <p class="subtitle">Création d'une infrastructure complète sous VMware</p>
+            <div class="tags">
+                <span class="tag">VMware vSphere</span>
+                <span class="tag">Windows Server 2019</span>
+                <span class="tag">Linux Ubuntu Server</span>
+                <span class="tag">Active Directory</span>
+                <span class="tag">Apache</span>
+                <span class="tag">MySQL</span>
+            </div>
+        </div>
+
+        <!-- Contexte -->
+        <div class="content-section">
+            <h2><img src="icon-cible.png" alt="Contexte" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Contexte du projet</h2>
+            <p>
+                Ce projet avait pour objectif de concevoir et déployer une infrastructure virtualisée complète 
+                simulant un environnement d'entreprise. L'infrastructure devait être évolutive, sécurisée et 
+                permettre la mise en place de différents services (web, base de données, annuaire).
+            </p>
+            <p>
+                <strong>Durée du projet :</strong> 3 mois<br>
+                <strong>Type :</strong> Projet individuel dans le cadre du BTS SIO
+            </p>
+        </div>
+
+        <!-- Objectifs -->
+        <div class="content-section">
+            <h2><img src="icon-objectif.png" alt="Objectifs" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Objectifs pédagogiques</h2>
+            <ul>
+                <li>Maîtriser les concepts de virtualisation avec VMware vSphere</li>
+                <li>Concevoir une architecture réseau adaptée aux besoins</li>
+                <li>Déployer et configurer différents systèmes d'exploitation serveurs</li>
+                <li>Mettre en place un contrôleur de domaine Active Directory</li>
+                <li>Configurer des services web et bases de données</li>
+                <li>Documenter l'infrastructure de manière professionnelle</li>
+            </ul>
+        </div>
+
+        <!-- Architecture -->
+        <div class="content-section">
+            <h2><img src="icon-architecture.png" alt="Architecture" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Architecture mise en place</h2>
+            <p>L'infrastructure se compose de 5 machines virtuelles interconnectées :</p>
+            
+            <div class="architecture-diagram">
+                <pre>
+┌─────────────────────────────────────────────────┐
+│           RÉSEAU 192.168.100.0/24              │
+│                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
+│  │   DC01   │  │  WEB01   │  │   DB01   │    │
+│  │ Win 2019 │  │  Ubuntu  │  │  Ubuntu  │    │
+│  │   (AD)   │  │ (Apache) │  │ (MySQL)  │    │
+│  └──────────┘  └──────────┘  └──────────┘    │
+│                                                 │
+│  ┌──────────┐  ┌──────────┐                   │
+│  │  FILE01  │  │  CLIENT  │                   │
+│  │ Win 2019 │  │ Win 10   │                   │
+│  │  (Files) │  │ (Test)   │                   │
+│  └──────────┘  └──────────┘                   │
+└─────────────────────────────────────────────────┘
+                </pre>
+            </div>
+
+            <div class="two-columns">
+                <div class="column-item">
+                    <h4>DC01 - Contrôleur de Domaine</h4>
+                    <p>Windows Server 2019<br>
+                    IP: 192.168.100.10<br>
+                    Services: AD DS, DNS, DHCP</p>
+                </div>
+                <div class="column-item">
+                    <h4>WEB01 - Serveur Web</h4>
+                    <p>Ubuntu Server 20.04<br>
+                    IP: 192.168.100.20<br>
+                    Services: Apache2, PHP</p>
+                </div>
+                <div class="column-item">
+                    <h4>DB01 - Serveur Base de Données</h4>
+                    <p>Ubuntu Server 20.04<br>
+                    IP: 192.168.100.30<br>
+                    Services: MySQL 8.0</p>
+                </div>
+                <div class="column-item">
+                    <h4>FILE01 - Serveur de Fichiers</h4>
+                    <p>Windows Server 2019<br>
+                    IP: 192.168.100.40<br>
+                    Services: File Server, DFS</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Réalisations techniques -->
+        <div class="content-section">
+            <h2><img src="icon-technique.png" alt="Technique" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Réalisations techniques détaillées</h2>
+            
+            <h3>1. Configuration de l'environnement VMware</h3>
+            <ul>
+                <li>Installation et configuration de VMware vSphere ESXi 7.0</li>
+                <li>Création de 5 machines virtuelles avec allocation optimisée des ressources</li>
+                <li>Configuration de virtual switches et port groups</li>
+                <li>Mise en place de snapshots avant chaque modification majeure</li>
+            </ul>
+
+            <h3>2. Déploiement du contrôleur de domaine (DC01)</h3>
+            <ul>
+                <li>Installation de Windows Server 2019 en mode Core</li>
+                <li>Promotion en contrôleur de domaine (domaine: entreprise.local)</li>
+                <li>Configuration des services DNS et DHCP</li>
+                <li>Création de l'arborescence OU, utilisateurs et groupes</li>
+                <li>Mise en place de GPO pour la sécurité (politique de mots de passe, verrouillage écran)</li>
+            </ul>
+
+            <h3>3. Configuration du serveur Web (WEB01)</h3>
+            <ul>
+                <li>Installation d'Ubuntu Server 20.04 LTS</li>
+                <li>Installation et configuration d'Apache2</li>
+                <li>Installation de PHP 7.4 et modules nécessaires</li>
+                <li>Mise en place d'un site web de démonstration</li>
+                <li>Configuration d'un virtual host pour plusieurs sites</li>
+            </ul>
+
+            <h3>4. Mise en place de la base de données (DB01)</h3>
+            <ul>
+                <li>Installation de MySQL 8.0 sous Ubuntu Server</li>
+                <li>Sécurisation avec mysql_secure_installation</li>
+                <li>Création de bases de données et utilisateurs dédiés</li>
+                <li>Configuration de l'accès distant depuis WEB01</li>
+                <li>Mise en place de sauvegardes automatiques avec cron</li>
+            </ul>
+
+            <h3>5. Serveur de fichiers et client de test</h3>
+            <ul>
+                <li>Configuration du serveur de fichiers FILE01 avec partages réseau</li>
+                <li>Mise en place de quotas et permissions NTFS</li>
+                <li>Intégration d'un client Windows 10 au domaine</li>
+                <li>Tests de connexion et accès aux différents services</li>
+            </ul>
+        </div>
+
+        <!-- Résultats -->
+        <div class="highlight-box">
+            <h3>Résultats obtenus</h3>
+            <ul>
+                <li><strong>Infrastructure fonctionnelle :</strong> Les 5 serveurs communiquent correctement et tous les services sont opérationnels</li>
+                <li><strong>Haute disponibilité :</strong> Snapshots configurés pour restauration rapide en cas de problème</li>
+                <li><strong>Sécurité :</strong> Politique de sécurité Active Directory appliquée sur tous les postes du domaine</li>
+                <li><strong>Documentation complète :</strong> 40 pages incluant schémas réseau, procédures d'installation et de maintenance</li>
+                <li><strong>Optimisation des ressources :</strong> Allocation dynamique de la RAM permettant d'économiser 30% de ressources</li>
+            </ul>
+        </div>
+
+        <!-- Difficultés -->
+        <div class="content-section">
+            <h2><img src="icon-problemes.png" alt="Difficultés" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Difficultés rencontrées</h2>
+            
+            <h3>Problème 1 : Connectivité réseau entre VM</h3>
+            <p>
+                <strong>Difficulté :</strong> Les machines virtuelles ne communiquaient pas entre elles malgré une configuration réseau apparemment correcte.
+            </p>
+            <p>
+                <strong>Solution :</strong> Après analyse, j'ai découvert que le virtual switch était configuré en mode "privé" au lieu de "interne". 
+                Modification de la configuration réseau dans vSphere et redémarrage des VM pour appliquer les changements.
+            </p>
+
+            <h3>Problème 2 : Performance du serveur de base de données</h3>
+            <p>
+                <strong>Difficulté :</strong> Le serveur MySQL était très lent lors des requêtes avec le site web.
+            </p>
+            <p>
+                <strong>Solution :</strong> Augmentation de la RAM allouée de 2 Go à 4 Go et optimisation des paramètres MySQL (buffer pool, query cache). 
+                Amélioration des performances de 200%.
+            </p>
+        </div>
+
+        <!-- Compétences -->
+        <div class="content-section">
+            <h2><img src="icon-competences.png" alt="Compétences" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Compétences développées</h2>
+            <div class="two-columns">
+                <div class="column-item">
+                    <h4>Compétences techniques</h4>
+                    <ul style="margin-left: 0;">
+                        <li>Virtualisation VMware</li>
+                        <li>Administration Windows Server</li>
+                        <li>Administration Linux</li>
+                        <li>Active Directory</li>
+                        <li>Services web et BDD</li>
+                        <li>Réseau et sécurité</li>
+                    </ul>
+                </div>
+                <div class="column-item">
+                    <h4>Compétences transversales</h4>
+                    <ul style="margin-left: 0;">
+                        <li>Gestion de projet</li>
+                        <li>Documentation technique</li>
+                        <li>Résolution de problèmes</li>
+                        <li>Autonomie et rigueur</li>
+                        <li>Analyse et conception</li>
+                        <li>Veille technologique</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="content-section">
+            <h2><img src="icon-conclusion.png" alt="Conclusion" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Conclusion</h2>
+            <p>
+                Ce projet m'a permis de mettre en pratique l'ensemble des connaissances acquises en administration 
+                systèmes et réseaux. J'ai particulièrement apprécié la dimension architecturale du projet, qui m'a 
+                amené à réfléchir à l'organisation optimale des services et à la sécurisation de l'infrastructure.
+            </p>
+            <p>
+                L'expérience acquise sur VMware vSphere me sera très utile dans ma future carrière, cette technologie 
+                étant largement utilisée en entreprise. J'ai également renforcé mes compétences en dépannage et en 
+                résolution de problèmes techniques complexes.
+            </p>
+            <p>
+                <strong>Perspectives d'amélioration :</strong> Dans une version future, je souhaiterais ajouter un 
+                système de backup automatisé complet et mettre en place de la haute disponibilité avec du clustering.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Portfolio BTS SIO SISR - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
