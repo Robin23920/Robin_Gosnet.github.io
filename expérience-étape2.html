@@ -1,1 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expérience - Stage Administration Systèmes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-orange: #ff6b35;
+            --dark-orange: #e55527;
+            --light-orange: #ff8c61;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --text-light: #f5f5f5;
+            --text-gray: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding: 30px 10%;
+            border-bottom: 3px solid var(--primary-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: var(--light-orange);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 10%;
+        }
+
+        .experience-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .experience-header h1 {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .experience-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .meta-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--darker-bg);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary-orange);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-section h2 {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-section h3 {
+            color: var(--light-orange);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .content-section ul li {
+            color: var(--text-gray);
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .content-section ul li::before {
+            content: "▸";
+            color: var(--primary-orange);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: var(--primary-orange);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Highlights Box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p, .highlight-box ul li {
+            color: white;
+        }
+
+        .highlight-box ul li::before {
+            color: var(--darker-bg);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background: var(--dark-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .gallery-caption {
+            padding: 20px;
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 2px solid var(--primary-orange);
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: var(--text-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 5%;
+            }
+
+            .experience-header h1 {
+                font-size: 2rem;
+            }
+
+            .experience-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+    </header>
+
+    <div class="container">
+        <!-- Header de l'expérience -->
+        <div class="experience-header">
+            <h1>Stage - Administration Systèmes</h1>
+            <div class="experience-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">🏢</span>
+                    <span>Nom de l'Entreprise</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📅</span>
+                    <span>Juin 2024 - Août 2024 (8 semaines)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Ville, Pays</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contexte -->
+        <div class="content-section">
+            <h2>🎯 Contexte de la mission</h2>
+            <p>
+                Décrivez ici le contexte de votre stage ou projet. Présentez l'entreprise, son secteur d'activité, 
+                et l'environnement technique dans lequel vous avez évolué.
+            </p>
+            <p>
+                Exemple : "J'ai effectué mon stage au sein du service informatique d'une entreprise de 200 personnes 
+                spécialisée dans le secteur de la distribution. L'infrastructure comprend 50 serveurs (physiques et 
+                virtuels), 200 postes clients, et plusieurs sites distants connectés via VPN."
+            </p>
+        </div>
+
+        <!-- Missions principales -->
+        <div class="content-section">
+            <h2>💼 Missions principales</h2>
+            
+            <h3>1. Administration des serveurs Windows</h3>
+            <ul>
+                <li>Maintenance et supervision de 15 serveurs Windows Server 2019/2022</li>
+                <li>Gestion des utilisateurs et groupes via Active Directory</li>
+                <li>Configuration des GPO (Group Policy Objects) pour la sécurisation des postes</li>
+                <li>Mise à jour régulière des serveurs et application des correctifs de sécurité</li>
+            </ul>
+
+            <h3>2. Support technique niveau 1 et 2</h3>
+            <ul>
+                <li>Traitement de 20 à 30 tickets par semaine via l'outil de ticketing</li>
+                <li>Résolution de problèmes matériels et logiciels</li>
+                <li>Installation et configuration de postes de travail</li>
+                <li>Formation des utilisateurs aux bonnes pratiques informatiques</li>
+            </ul>
+
+            <h3>3. Projet de virtualisation</h3>
+            <ul>
+                <li>Migration de 5 serveurs physiques vers VMware vSphere</li>
+                <li>Configuration des snapshots et sauvegardes automatiques</li>
+                <li>Documentation complète de l'infrastructure virtualisée</li>
+            </ul>
+        </div>
+
+        <!-- Compétences développées -->
+        <div class="content-section">
+            <h2>🚀 Compétences développées</h2>
+            <div class="tags">
+                <span class="tag">Windows Server 2019/2022</span>
+                <span class="tag">Active Directory</span>
+                <span class="tag">VMware vSphere</span>
+                <span class="tag">PowerShell</span>
+                <span class="tag">DNS / DHCP</span>
+                <span class="tag">GPO</span>
+                <span class="tag">Ticketing</span>
+                <span class="tag">Documentation technique</span>
+            </div>
+        </div>
+
+        <!-- Réalisations marquantes -->
+        <div class="highlight-box">
+            <h3>✨ Réalisations marquantes</h3>
+            <ul>
+                <li><strong>Optimisation des sauvegardes :</strong> Réduction de 40% du temps de sauvegarde grâce à la mise en place d'une solution incrémentielle</li>
+                <li><strong>Automatisation :</strong> Création de scripts PowerShell pour automatiser la création de comptes utilisateurs (gain de 30 minutes par compte)</li>
+                <li><strong>Sécurité :</strong> Mise en place d'une politique de mots de passe renforcée touchant 200 utilisateurs</li>
+                <li><strong>Documentation :</strong> Rédaction d'un guide de 50 pages sur les procédures d'administration du système</li>
+            </ul>
+        </div>
+
+        <!-- Difficultés et solutions -->
+        <div class="content-section">
+            <h2>🔧 Difficultés rencontrées et solutions apportées</h2>
+            
+            <h3>Difficulté 1 : Migration complexe d'un serveur</h3>
+            <p>
+                <strong>Problème :</strong> Lors de la migration d'un serveur de base de données vers l'environnement 
+                virtualisé, nous avons rencontré des problèmes de performances importantes.
+            </p>
+            <p>
+                <strong>Solution :</strong> Après analyse avec l'outil de monitoring VMware, j'ai identifié un problème 
+                de ressources allouées. J'ai augmenté la RAM de 8 à 16 Go et alloué 2 vCPU supplémentaires, ce qui a 
+                résolu le problème et amélioré les performances de 60%.
+            </p>
+
+            <h3>Difficulté 2 : Résistance au changement des utilisateurs</h3>
+            <p>
+                <strong>Problème :</strong> Les utilisateurs étaient réticents à la nouvelle politique de mots de passe 
+                complexes.
+            </p>
+            <p>
+                <strong>Solution :</strong> J'ai organisé 5 sessions de formation pour expliquer les enjeux de sécurité 
+                et présenter les bonnes pratiques. J'ai également créé un guide visuel simplifié qui a été très apprécié.
+            </p>
+        </div>
+
+        <!-- Galerie (optionnel) -->
+        <div class="content-section">
+            <h2>📸 Aperçu des réalisations</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-image">🖥️</div>
+                    <div class="gallery-caption">Infrastructure serveurs</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">📊</div>
+                    <div class="gallery-caption">Dashboard de monitoring</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">📝</div>
+                    <div class="gallery-caption">Documentation technique</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bilan -->
+        <div class="content-section">
+            <h2>🎓 Bilan et apports professionnels</h2>
+            <p>
+                Cette expérience m'a permis de consolider mes connaissances théoriques acquises en BTS SIO et de 
+                développer de nouvelles compétences techniques. J'ai particulièrement apprécié :
+            </p>
+            <ul>
+                <li>Le travail en équipe avec des professionnels expérimentés</li>
+                <li>La gestion de projets concrets avec des contraintes de temps et de qualité</li>
+                <li>L'autonomie progressive qui m'a été accordée au fil des semaines</li>
+                <li>La découverte de l'environnement professionnel et de ses exigences</li>
+            </ul>
+            <p>
+                Ce stage a confirmé mon orientation professionnelle vers l'administration systèmes et réseaux, 
+                et m'a donné envie de poursuivre dans cette voie en me spécialisant notamment dans la virtualisation 
+                et l'automatisation.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Portfolio BTS SIO SISR - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
