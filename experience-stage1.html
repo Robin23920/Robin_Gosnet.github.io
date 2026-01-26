@@ -212,7 +212,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .gallery-caption {
@@ -351,15 +359,20 @@
             <div class="gallery">
                 <div class="gallery-item">
                     <div class="gallery-image">
-                        <img src="image/tourniquet.jpg" alt="Photo tourniquet" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                    <div class="gallery-caption">Infrastructure serveurs</div>
+                        <img src="image/tourniquet.jpg" alt="Photo tourniquet">
+                    </div>
+                    <div class="gallery-caption">Système de tourniquet</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">📊</div>
-                    <div class="gallery-caption">Dashboard de monitoring</div>
+                    <div class="gallery-image">
+                        <img src="image/site-web.jpg" alt="Site web">
+                    </div>
+                    <div class="gallery-caption">Mise à jour du site web</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">📝</div>
+                    <div class="gallery-image">
+                        <img src="image/documentation.jpg" alt="Documentation">
+                    </div>
                     <div class="gallery-caption">Documentation technique</div>
                 </div>
             </div>
