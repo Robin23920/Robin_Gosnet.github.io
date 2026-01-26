@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille - Cybersécurité</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #ff6b35;
+            --dark-orange: #e55527;
+            --light-orange: #ff8c61;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #16213e;
+            --text-light: #f5f5f5;
+            --text-gray: #a8a8a8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding: 30px 10%;
+            border-bottom: 3px solid var(--primary-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            color: var(--light-orange);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 10%;
+        }
+
+        .veille-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .veille-header h1 {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .veille-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: var(--darker-bg);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary-orange);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .content-section h2 {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-section h3 {
+            color: var(--light-orange);
+            font-size: 1.5rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .content-section ul li {
+            color: var(--text-gray);
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .content-section ul li::before {
+            content: "▸";
+            color: var(--primary-orange);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Articles de veille */
+        .article-card {
+            background: var(--dark-bg);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-top: 3px solid var(--primary-orange);
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateX(10px);
+        }
+
+        .article-date {
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .article-card h4 {
+            color: var(--light-orange);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .article-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .article-source {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .article-link {
+            display: inline-block;
+            color: var(--primary-orange);
+            text-decoration: none;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .article-link:hover {
+            color: var(--light-orange);
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: var(--primary-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Sources */
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .source-item {
+            background: var(--dark-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-orange);
+        }
+
+        .source-item h4 {
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        .source-item p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p {
+            color: white;
+        }
+
+        footer {
+            background: var(--darker-bg);
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 2px solid var(--primary-orange);
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: var(--text-gray);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 5%;
+            }
+
+            .veille-header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .sources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">← Retour au portfolio</a>
+    </header>
+
+    <div class="container">
+        <div class="veille-header">
+            <h1>Veille Technologique - Cybersécurité</h1>
+            <p>
+                Veille sur les menaces émergentes, les vulnérabilités et les bonnes pratiques 
+                de sécurisation des infrastructures informatiques.
+            </p>
+        </div>
+
+        <!-- Introduction -->
+        <div class="content-section">
+            <h2><img src="icon-cible.png" alt="Objectifs" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Objectifs de cette veille</h2>
+            <p>
+                Dans le cadre de ma formation BTS SIO SISR, j'effectue une veille technologique active sur 
+                le domaine de la cybersécurité. Cette veille me permet de :
+            </p>
+            <ul>
+                <li>Rester informé des dernières menaces et vulnérabilités</li>
+                <li>Comprendre les nouvelles techniques d'attaque et de défense</li>
+                <li>Découvrir les outils et solutions de sécurité émergents</li>
+                <li>Suivre l'évolution des réglementations (RGPD, NIS2, etc.)</li>
+                <li>Améliorer mes compétences en sécurité des systèmes et réseaux</li>
+            </ul>
+        </div>
+
+        <!-- Sources -->
+        <div class="content-section">
+            <h2><img src="icon-sources.png" alt="Sources" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Sources consultées régulièrement</h2>
+            <div class="sources-grid">
+                <div class="source-item">
+                    <h4>ANSSI</h4>
+                    <p>Agence Nationale de la Sécurité des Systèmes d'Information - Bulletins officiels et recommandations</p>
+                </div>
+                <div class="source-item">
+                    <h4>CERT-FR</h4>
+                    <p>Alertes de sécurité et avis sur les vulnérabilités critiques</p>
+                </div>
+                <div class="source-item">
+                    <h4>Zataz</h4>
+                    <p>Actualités sur les cyberattaques et la cybercriminalité</p>
+                </div>
+                <div class="source-item">
+                    <h4>Bleeping Computer</h4>
+                    <p>News techniques sur les vulnérabilités et malwares</p>
+                </div>
+                <div class="source-item">
+                    <h4>The Hacker News</h4>
+                    <p>Actualités quotidiennes sur la cybersécurité</p>
+                </div>
+                <div class="source-item">
+                    <h4>r/netsec (Reddit)</h4>
+                    <p>Communauté de professionnels de la sécurité</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Articles récents -->
+        <div class="content-section">
+            <h2><img src="icon-articles.png" alt="Articles" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Articles et découvertes récentes</h2>
+
+            <div class="article-card">
+                <div class="article-date">Décembre 2024</div>
+                <h4>Vulnérabilité critique dans Log4j - Log4Shell</h4>
+                <p>
+                    Découverte d'une faille de sécurité majeure (CVE-2021-44228) dans la bibliothèque Java Log4j, 
+                    permettant l'exécution de code à distance. Cette vulnérabilité, qualifiée de critique avec un 
+                    score CVSS de 10/10, affecte des millions d'applications à travers le monde.
+                </p>
+                <p>
+                    <strong>Enseignements :</strong> Cette faille m'a permis de comprendre l'importance de maintenir 
+                    à jour les dépendances logicielles et de mettre en place des processus de gestion des vulnérabilités. 
+                    J'ai étudié les méthodes de détection et les correctifs disponibles.
+                </p>
+                <div class="tags">
+                    <span class="tag">Vulnérabilité</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">CVE</span>
+                    <span class="tag">Critical</span>
+                </div>
+                <a href="#" class="article-link">Source: CERT-FR →</a>
+            </div>
+
+            <div class="article-card">
+                <div class="article-date">Novembre 2024</div>
+                <h4>Attaques par ransomware : LockBit 3.0</h4>
+                <p>
+                    Analyse des nouvelles variantes du ransomware LockBit qui cible principalement les entreprises. 
+                    Le groupe utilise des techniques de double extorsion : chiffrement des données ET menace de 
+                    publication des données volées.
+                </p>
+                <p>
+                    <strong>Enseignements :</strong> J'ai approfondi mes connaissances sur les bonnes pratiques de 
+                    protection : sauvegardes 3-2-1, segmentation réseau, formation des utilisateurs, et plan de 
+                    réponse aux incidents. Importance d'avoir des backups offline.
+                </p>
+                <div class="tags">
+                    <span class="tag">Ransomware</span>
+                    <span class="tag">Malware</span>
+                    <span class="tag">Backup</span>
+                </div>
+                <a href="#" class="article-link">Source: ANSSI →</a>
+            </div>
+
+            <div class="article-card">
+                <div class="article-date">Octobre 2024</div>
+                <h4>Zero Trust Architecture : nouvelle approche de la sécurité</h4>
+                <p>
+                    Étude du modèle Zero Trust qui remet en question le concept de périmètre de sécurité traditionnel. 
+                    Principe : "Never trust, always verify" - chaque accès doit être authentifié et autorisé, 
+                    qu'il vienne de l'intérieur ou de l'extérieur du réseau.
+                </p>
+                <p>
+                    <strong>Enseignements :</strong> Cette approche moderne est particulièrement pertinente avec 
+                    la généralisation du télétravail. J'ai exploré les technologies associées : MFA, micro-segmentation, 
+                    least privilege access, surveillance continue.
+                </p>
+                <div class="tags">
+                    <span class="tag">Architecture</span>
+                    <span class="tag">Zero Trust</span>
+                    <span class="tag">MFA</span>
+                </div>
+                <a href="#" class="article-link">Source: The Hacker News →</a>
+            </div>
+        </div>
+
+        <!-- Tendances -->
+        <div class="highlight-box">
+            <h3>Tendances observées en 2024</h3>
+            <ul>
+                <li><strong>IA et cybersécurité :</strong> Utilisation croissante de l'IA pour détecter les menaces, mais aussi pour créer des attaques plus sophistiquées (deepfakes, phishing automatisé)</li>
+                <li><strong>Supply Chain Attacks :</strong> Augmentation des attaques ciblant la chaîne d'approvisionnement logicielle</li>
+                <li><strong>Cloud Security :</strong> Multiplication des erreurs de configuration dans le cloud entraînant des fuites de données</li>
+                <li><strong>IoT Security :</strong> Les objets connectés restent un maillon faible avec de nombreuses vulnérabilités</li>
+            </ul>
+        </div>
+
+        <!-- Outils découverts -->
+        <div class="content-section">
+            <h2><img src="icon-outils.png" alt="Outils" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Outils et technologies découverts</h2>
+            
+            <h3>Outils de détection</h3>
+            <ul>
+                <li><strong>Wazuh :</strong> Plateforme open-source de détection d'intrusions (SIEM)</li>
+                <li><strong>Suricata :</strong> IDS/IPS haute performance pour la détection de menaces réseau</li>
+                <li><strong>OSSEC :</strong> Système de détection d'intrusions basé sur l'hôte</li>
+            </ul>
+
+            <h3>Outils d'analyse de vulnérabilités</h3>
+            <ul>
+                <li><strong>Nessus :</strong> Scanner de vulnérabilités professionnel</li>
+                <li><strong>OpenVAS :</strong> Alternative open-source pour l'audit de sécurité</li>
+                <li><strong>Nikto :</strong> Scanner de vulnérabilités web</li>
+            </ul>
+
+            <h3>Outils de durcissement</h3>
+            <ul>
+                <li><strong>Lynis :</strong> Outil d'audit et durcissement pour systèmes Unix/Linux</li>
+                <li><strong>CIS Benchmarks :</strong> Standards de sécurité pour la configuration des systèmes</li>
+            </ul>
+        </div>
+
+        <!-- Applications pratiques -->
+        <div class="content-section">
+            <h2><img src="icon-pratique.png" alt="Application" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Applications dans mes projets</h2>
+            <p>
+                Cette veille technologique m'a permis d'appliquer concrètement plusieurs concepts dans mes projets :
+            </p>
+            
+            <h3>Projet d'infrastructure virtualisée</h3>
+            <ul>
+                <li>Mise en place de politiques de mots de passe renforcées (inspiré des recommandations ANSSI)</li>
+                <li>Configuration d'un pare-feu avec règles restrictives (principe du moindre privilège)</li>
+                <li>Implémentation de la journalisation centralisée pour la détection d'anomalies</li>
+            </ul>
+
+            <h3>Stage en entreprise</h3>
+            <ul>
+                <li>Sensibilisation des utilisateurs aux risques de phishing suite à une campagne observée</li>
+                <li>Mise à jour urgente de systèmes suite à des alertes CERT-FR</li>
+                <li>Proposition d'amélioration de la politique de sauvegarde (règle 3-2-1)</li>
+            </ul>
+        </div>
+
+        <!-- Méthode de veille -->
+        <div class="content-section">
+            <h2><img src="icon-methode.png" alt="Méthode" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Ma méthode de veille</h2>
+            <p>Pour organiser efficacement ma veille technologique, j'utilise :</p>
+            <ul>
+                <li><strong>Feedly :</strong> Agrégateur RSS pour centraliser tous mes flux d'actualités</li>
+                <li><strong>Google Alerts :</strong> Alertes automatiques sur des mots-clés spécifiques</li>
+                <li><strong>Twitter/X :</strong> Suivi de comptes d'experts en cybersécurité</li>
+                <li><strong>Notion :</strong> Base de données personnelle pour organiser mes notes et articles sauvegardés</li>
+                <li><strong>Fréquence :</strong> Consultation quotidienne (15-20 min) + approfondissement hebdomadaire (1-2h)</li>
+            </ul>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="content-section">
+            <h2><img src="icon-conclusion.png" alt="Conclusion" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;"> Bilan de cette veille</h2>
+            <p>
+                Cette veille technologique sur la cybersécurité est devenue une habitude essentielle dans ma 
+                formation. Elle me permet non seulement de rester à jour sur les menaces actuelles, mais aussi 
+                d'anticiper les évolutions futures du métier.
+            </p>
+            <p>
+                Les compétences acquises grâce à cette veille sont directement applicables dans mes projets 
+                et stages, ce qui me permet d'apporter une réelle valeur ajoutée en matière de sécurité.
+            </p>
+            <p>
+                <strong>Objectif futur :</strong> Obtenir une certification en cybersécurité (CompTIA Security+ 
+                ou CEH) pour consolider et valider mes connaissances.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Portfolio BTS SIO SISR - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
