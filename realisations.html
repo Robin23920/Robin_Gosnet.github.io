@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réalisations | Robin Gosnet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .realisation-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .realisation-card .content {
+            flex: 1;
+        }
+        .realisation-card .actions {
+            margin-top: 1.5rem;
+        }
+        .category-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">RG.</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="experiences.html">Expériences</a></li>
+                <li><a href="realisations.html" class="active">Réalisations</a></li>
+                <li><a href="veille.html">Veille Technologique</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1 class="section-title text-center" style="border:none;">Mes Réalisations</h1>
+            <p class="text-center mb-2" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 3rem auto;">
+                Projets réalisés dans le cadre de ma formation BTS SIO et lors de mes immersions professionnelles.
+            </p>
+
+            <div class="card-grid">
+                
+                <!-- Realisation 1 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Formation</span>
+                        <h3>Mise en place de Zabbix et GLPI infra E6</h3>
+                        <p>Déploiement d'une solution de supervision (Zabbix) et d'un outil de gestion de parc informatique (GLPI).</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-zabbix-glpi.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 2 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Formation</span>
+                        <h3>Gestion des habilitations</h3>
+                        <p>Gestion des droits et accès sur différents services : GLPI, Zabbix, Active Directory, Nextcloud.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-habilitations.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 3 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Formation</span>
+                        <h3>Création de site web pour mini projet d'infra</h3>
+                        <p>Développement d'un site web vitrine pour accompagner un projet d'infrastructure système.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-site-web.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 4 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Formation</span>
+                        <h3>Création infra E6</h3>
+                        <p>Conception et déploiement de l'infrastructure globale pour l'épreuve E6.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-infra-e6.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 5 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Stage - Delta Technologies</span>
+                        <h3>Mise en place serveur et poste informatique</h3>
+                        <p>Installation, configuration et déploiement de serveurs et de postes clients en milieu professionnel.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-serveur-delta.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 6 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Stage - Aéroport Angers</span>
+                        <h3>Projet Digicode</h3>
+                        <p>Automatisation de la procédure de sortie de piste à l'Aéroport Angers Loire.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-digicode-aeroport.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 7 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Stage - Delta Technologies</span>
+                        <h3>Mise en place service utilisateur</h3>
+                        <p>Configuration et déploiement d'outils métiers et de messagerie (Outlook).</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-service-utilisateur-delta.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+                <!-- Realisation 8 -->
+                <div class="card realisation-card">
+                    <div class="content">
+                        <span class="category-badge">Stage - Aéroport Angers</span>
+                        <h3>Mise à jour du site web</h3>
+                        <p>Refonte partielle et maintenance du site web de l'Aéroport d'Angers.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="rea-maj-site-aeroport.html" class="btn btn-outline" style="width: 100%; text-align: center;">Voir le projet</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Robin Gosnet. Portfolio réalisé dans le cadre du BTS SIO.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
